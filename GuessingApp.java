@@ -7,14 +7,17 @@ import java.util.Scanner;
  * 1. Initialize game
  * 2. Accept user guesses
  * 3. Validate guesses
+ * 4. Provide hints on wrong answer
  * 4. Stop when game ends
  * 
  * 
  * @author Developer
- * @version 2.0
+ * @version 3.0
  */
 
 public class GuessingApp {
+
+    static int hintCount = 1;
     public static void main(String[] args) {
         System.out.println("Welcome to the Guessing App");
         
@@ -34,6 +37,7 @@ public class GuessingApp {
             attempts++;
 
             String result = GuessValidator.validateGuess(guess, config.getTargetNumber());
+            System.out.println(HintService.generateHint(config.getTargetNumber(), hintCount++));
             System.out.println(result);
 
             /**
