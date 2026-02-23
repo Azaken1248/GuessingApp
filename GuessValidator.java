@@ -7,7 +7,7 @@
  * It does NOT handle input or output
  */
 
-public class GuessValidator {
+class GuessValidator {
     
     /**
      * Compares guess with target and
