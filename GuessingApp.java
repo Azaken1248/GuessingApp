@@ -3,33 +3,50 @@ import java.util.Scanner;
 /**
  * MAIN CLASS
  * 
- * Use Case 4: Error Handling & validation
+ * Use Case 5: Game Result Storage
  * 
- * This class coordinates the game execution while ensuring
- * all user inputs are safely validated before processing.
+ * This class coordinates the complete game flow
+ * and persists the final result after completion
  * 
  * Responsibilites:
- * 1. Initialize game configuration 
- * 2. Accept user input
- * 3. Validate input using validationService
- * 4. Handle game flow without crashing on invalid input
+ * - Initialize game configuration 
+ * - Accept and validate user guesses
+ * - Generate hints when applicable
+ * - Store game result at the end
  * 
  * 
  * @author Developer
- * @version 4.0
+ * @version 5.0
  */
 
 public class GuessingApp {
-
-    static int hintCount = 0;
     public static void main(String[] args) throws InvalidInputException{
+        
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("===========================");
         System.out.println("Welcome to the Guessing App");
+        System.out.println("===========================\n");
+
+        /**
+         * Player name is captured once
+         * and stored along with game results
+         */
+        System.out.println("Enter Player Name: ");
+        String player = scanner.nextLine();
         
         GameConfig config = new GameConfig();
         config.showRules();
 
-        Scanner scanner = new Scanner(System.in);
+        
         int attempts = 0;
+        int hintCount = 0;
+
+        /**
+         * Tracks weather the player
+         * successfully guessed the number.
+         */
+        boolean win = false;
 
         /**
          * Game loop runs until the player
@@ -59,9 +76,12 @@ public class GuessingApp {
              * if correct number is guessed.
              */
             if("CORRECT".equals(result)){
+                win = true;
                 break;
             }
         }
+
+        StorageService.saveResult(player, attempts, win);
 
         scanner.close();
     }
