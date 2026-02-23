@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class GuessingApp {
 
-    static int hintCount = 1;
+    static int hintCount = 0;
     public static void main(String[] args) {
         System.out.println("Welcome to the Guessing App");
         
